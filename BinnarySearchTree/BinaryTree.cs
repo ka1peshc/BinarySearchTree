@@ -7,48 +7,54 @@ namespace BinnarySearchTree
     class BinaryTree<T> where T:IComparable
     {
         private Node<T> root;
-        //public BinaryTree()
-        //{
-        //    this.root = null;
-        //}
+        
         public Node<T> GetRoot()
         {
             return this.root;
         }
-        internal void InsertNode(T value)
+        /// <summary>
+        /// Inserting Node 
+        /// </summary>
+        /// <param name="value">int</param>
+        /// <param name="parent">Node</param>
+        internal void InsertNode(T value, Node<T> parent)
         {
-            Node<T> tempRoot = this.root;
+            
             Node<T> newNode = new Node<T>(value);
 
             //checking if root node is empty
-            if(tempRoot == null)
+            if(parent == null)
             {
                 this.root = newNode;
                 return;
             }
-            if (value.CompareTo(tempRoot.data) < 0)
+            //checking if value is less than parent data
+            if (value.CompareTo(parent.data) < 0)
             {
-                if(tempRoot.left == null)
+                if(parent.left == null)
                 {
-                    tempRoot.left = newNode;
+                    parent.left = newNode;
                     return;
                 }
-                tempRoot = tempRoot.left;
-                InsertNode(value); 
+                parent = parent.left;
+                InsertNode(value,parent); 
             }
-            //value greater than root data
-            if (value.CompareTo(tempRoot.data) > 0)
+            //checking if value is greater than parent data
+            if (value.CompareTo(parent.data) > 0)
             {
-                if (tempRoot.right == null)
+                if (parent.right == null)
                 {
-                    tempRoot.right = newNode;
+                    parent.right = newNode;
                     return;
                 }
-                tempRoot = tempRoot.right;
-                InsertNode(value);
+                parent = parent.right;
+                InsertNode(value,parent);
             }
         }
-
+        /// <summary>
+        /// Print in pattern as child.left<--parent.data-->child.right
+        /// </summary>
+        /// <param name="root"></param>
         internal void Inorder(Node<T> root)
         {
             if(root != null)
@@ -56,6 +62,32 @@ namespace BinnarySearchTree
                 Inorder(root.left);
                 Console.Write(root.data+" ");
                 Inorder(root.right);
+            }
+        }
+        /// <summary>
+        /// Print in pattern as child.left<--child.right<--parent
+        /// </summary>
+        /// <param name="root"></param>
+        internal void PreOrder(Node<T> root)
+        {
+            if (root != null)
+            {
+                Console.Write(root.data + " ");
+                PreOrder(root.left);
+                PreOrder(root.right);
+            }
+        }
+        /// <summary>
+        /// Print in pattern as parent-->child.left-->child.right
+        /// </summary>
+        /// <param name="root"></param>
+        internal void PostOrder(Node<T> root)
+        {
+            if (root != null)
+            {
+                PostOrder(root.left);
+                PostOrder(root.right);
+                Console.Write(root.data + " ");
             }
         }
     }
