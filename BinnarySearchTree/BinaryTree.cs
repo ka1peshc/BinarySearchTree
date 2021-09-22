@@ -90,5 +90,27 @@ namespace BinnarySearchTree
                 Console.Write(root.data + " ");
             }
         }
+        
+        internal void Search(T value, Node<T> parent)
+        {
+            if(parent == null)
+            {
+                Console.WriteLine("Not found");
+                return;
+            }
+            if(value.Equals(parent.data))
+            {
+                Console.WriteLine("Found value {0}", parent.data);
+                return;
+            }
+            if (value.CompareTo(parent.data) < 0)
+            {
+                Search(value, parent.left);
+            }
+            if (value.CompareTo(parent.data) > 0)
+            {
+                Search(value, parent.right);
+            }
+        }
     }
 }

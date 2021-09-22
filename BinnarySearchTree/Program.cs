@@ -23,8 +23,12 @@ namespace BinnarySearchTree
             BT.InsertNode(67, BT.GetRoot());
             Node<int> root = BT.GetRoot();
             BT.Inorder(root);
+            Console.WriteLine();
             BT.PreOrder(root);
+            Console.WriteLine();
             BT.PostOrder(root);
+            Console.WriteLine();
+            BT.Search(63, BT.GetRoot());
         }
     }
 }
