@@ -90,7 +90,11 @@ namespace BinnarySearchTree
                 Console.Write(root.data + " ");
             }
         }
-        
+        /// <summary>
+        /// Searching in Binary tree
+        /// </summary>
+        /// <param name="value">int</param>
+        /// <param name="parent">Node</param>
         internal void Search(T value, Node<T> parent)
         {
             if(parent == null)
